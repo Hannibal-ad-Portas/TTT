@@ -5,6 +5,7 @@ import sys
 import board
 from playerLogic import *
 from boardEval import *
+from AIplayer import *
 
 def usage (argv):
     print("Usage: ", sys.argv[0], " nrRows nrCols nr2Win player1 player2 depth")
@@ -28,8 +29,7 @@ def main (argv):
     player2 = str(sys.argv[5])
     depth   = int(sys.argv[6])
 
-    ply1Sym = 'X'
-    ply2Sym = 'O'
+    plySyms = ('X', 'O')
 
     gameBoard = board.Board((nrRows,nrCols))
     #populate the board with a simgle ' ' just to display the board
@@ -39,20 +39,24 @@ def main (argv):
     gameBoard.clear();
 
     turns = 1
-    while turns <= nrRows * nrCols:
+    while turns <= (nrRows * nrCols):
+    #while turns <= 11:
         print("Turn: ", turns)
+
         if turns > 1:
             gameBoard.draw()
 
         if not(turns % 2 == 0):
-            gameBoard, move = playGame(gameBoard, nr2Win, player1, ply1Sym, depth)
+            gameBoard, move = playGame(gameBoard, nr2Win, player1, 'X', 'O', depth)
+            #print("Move: ", move)
             gameBoard.draw()
             if (turns >= nr2Win):
                 if gameState(gameBoard, move, nr2Win):
                     print("Player 1 victory")
                     return
         else:
-            gameBoard, move = playGame(gameBoard, nr2Win, player2, ply2Sym, depth)
+            gameBoard, move = playGame(gameBoard, nr2Win, player2, 'X', 'O', depth)
+            #print("Move: ", move)
             gameBoard.draw()
             if (turns >= nr2Win):
                 if gameState(gameBoard, move, nr2Win):
@@ -60,6 +64,8 @@ def main (argv):
                     return
         turns = turns + 1
 
+    gameBoard.draw()
+    gameBoard.dump()
     print("Tie")
 
 

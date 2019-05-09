@@ -15,19 +15,21 @@
 #   move:       the most recent move, used to check for victory
 import board
 import random
+from AIplayer import *
 
-def playGame(gameBoard, nr2Win, player, plySym, depth):
+def playGame(gameBoard, nr2Win, player, maxSym, minSym, depth):
     if (player == "human"):
-        gameBoard, move = humanInput(gameBoard, plySym)
+        gameBoard, move = humanInput(gameBoard, maxSym)
     elif (player == "random"):
-        gameBoard, move = randomPlayer (gameBoard, plySym)
+        gameBoard, move = randomPlayer (gameBoard, minSym)
     elif (player == "AI"):
-        #TODO AB minmax search
         print("Placing token inteligently")
+        gameBoard, move = AIplayer(gameBoard, depth, maxSym, minSym, nr2Win)
 
     return gameBoard, move
 
 def randomPlayer (gameBoard, plySym):
+    print("Random Move")
     moveMade = False
     while not moveMade:
         x = random.randint(0,gameBoard.lendata())

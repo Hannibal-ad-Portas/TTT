@@ -1,1 +1,1 @@
-./TTT.py 3 3 3 random random 3
+./TTT.py 3 3 3 AI random 100
