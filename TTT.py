@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#! /usr/bin/env python3
 # Usage TTT nrRows nrCols nr2Win player1 player2 depth
 
 import sys
